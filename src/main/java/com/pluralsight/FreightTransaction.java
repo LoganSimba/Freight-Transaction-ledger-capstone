@@ -4,7 +4,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class FreightTransaction {
@@ -13,7 +15,7 @@ public class FreightTransaction {
     public static void main(String[] args) {
         // initialize an arraylist hand populate it with the csv
         ArrayList<Transaction> transactions = loadTransaction(FILE_NAME);
-        System.out.println(transactions.toString());//test for loading the csv
+        printTransactions(transactions);
 
     }
     //method to load transactions in the arrayList
@@ -50,6 +52,35 @@ public class FreightTransaction {
             System.out.println("No transactions found.");
         }
         return transactions; // return the arraylist holding data from the csv
+    }
+
+    // added a method to print transactions
+    public static void printTransactions(ArrayList<Transaction> transactions) {
+        if (transactions.isEmpty()) {// check edge case scenario to see if the arraylist is empty, if so print a message
+            System.out.println("No transactions found.");
+            return;// return of transactions arraylist is empty
+        }
+        // sort the transaction by date, then time, and then reverse the sorted order
+        transactions.sort(
+                Comparator.comparing(Transaction::getDate)
+                        .thenComparing(Transaction::getTime)
+                        .reversed()
+        );
+
+        //print the header with appropriate spaces for UI
+        System.out.printf("%-12s %-10s %-45s %-30s %12s%n",
+                "Date", "Time", "Description", "Vendor", "Amount");
+        System.out.println("-".repeat(120));// make a line of dashes for UI
+
+        // iterate through the list and print the transaction in the desired format, spacing for UI
+        for (Transaction transaction : transactions) {
+            System.out.printf("%-12s %-10s %-45s %-30s %,12.2f%n",
+                    transaction.getDate(),
+                    transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                    transaction.getDescription(),
+                    transaction.getVendor(),
+                    transaction.getAmount());
+        }
     }
 
 }
