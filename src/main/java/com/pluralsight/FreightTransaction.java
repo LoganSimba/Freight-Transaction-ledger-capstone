@@ -174,4 +174,18 @@ public class FreightTransaction {
         }
 
     }
+
+    //method to add deposits
+    public static ArrayList<Transaction> getDeposits(ArrayList<Transaction> transactions) {
+        // arrayList to store the transactions with deposits
+        ArrayList<Transaction> deposits = new ArrayList<>();
+        // iterate through the transactions arraylist and if amount > 0, add the transaction to deposit list
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                deposits.add(transaction);//add transaction to the deposit list
+            }
+        }
+        return deposits; //return the deposit list
+    }
+
 }
