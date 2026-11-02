@@ -240,4 +240,23 @@ public class FreightTransaction {
         }
 
     }
+
+    //method to get the month to date transactions
+    public static ArrayList<Transaction> monthToDate(ArrayList<Transaction> transactions) {
+        //initalize the arrayList that will store the list of month to date
+        ArrayList<Transaction> result = new ArrayList<>();
+        LocalDate today = LocalDate.now();// get the date now
+
+        //iterate through the arraylist
+        for (Transaction transaction : transactions) {
+            //if the transaction year == todays year and the transaction month == todays month, then add it
+            if (transaction.getDate().getYear() == today.getYear()
+                    && transaction.getDate().getMonth() == today.getMonth()) {
+                result.add(transaction); //add it to the result arraylist
+            }
+        }
+        return result; // return the arraylist
+    }
+
+
 }
