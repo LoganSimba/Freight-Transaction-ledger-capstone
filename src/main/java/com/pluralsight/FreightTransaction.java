@@ -19,11 +19,11 @@ public class FreightTransaction {
         Scanner scanner = new Scanner(System.in);
         // initialize an arraylist hand populate it with the csv
         ArrayList<Transaction> transactions = loadTransaction(FILE_NAME);
-        addTransaction(transactions, scanner, true, FILE_NAME);
-       printTransactions(transactions);
+        homeScreen(transactions, scanner);
 
 
     }
+
     //method to load transactions in the arrayList
     public static ArrayList<Transaction> loadTransaction(String fileName) {
         //initialize arraylist that will hold the transactions
@@ -88,12 +88,13 @@ public class FreightTransaction {
                     transaction.getAmount());
         }
     }
+
     // method to add a transaction to the file
-    public static void addTransaction(ArrayList<Transaction> transactions,Scanner scanner, boolean isDeposit, String FileName){
+    public static void addTransaction(ArrayList<Transaction> transactions, Scanner scanner, boolean isDeposit, String FileName) {
         System.out.println("Adding a transaction...");
-        if(isDeposit){
+        if (isDeposit) {
             System.out.println("Making a deposit transaction");//if boolean is true, we make a deposit transaction
-        }else{
+        } else {
             System.out.println("Making a payment transaction");//if boolean is false, we make a payment
         }
         // ask user for the description and store it in a variable
@@ -107,8 +108,8 @@ public class FreightTransaction {
         System.out.println(isDeposit ? "Deposit amount: " : "Payment amount: ");
         double amount = Double.parseDouble(scanner.nextLine().trim());
         //if boolean is false, then its a payment, so we make it a negative number
-        if(!isDeposit){
-            amount = - amount;
+        if (!isDeposit) {
+            amount = -amount;
         }
         LocalDate date = LocalDate.now();//we get the today for now
         LocalTime time = LocalTime.now();//we get the time for now
@@ -122,7 +123,7 @@ public class FreightTransaction {
                 vendor,
                 amount);
         //try catch block to write to the file and handle all issues
-        try{
+        try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, true));
             writer.write(line);
             writer.newLine();
@@ -130,10 +131,47 @@ public class FreightTransaction {
             System.out.println(isDeposit ? "Deposit saved" : "Payment saved");
             writer.close();
         }//catch the exception
-        catch(Exception e){
+        catch (Exception e) {
             System.out.println("Could not save to file: " + e.getMessage());
         }
 
     }
 
+    // add method do display screen/menu
+    public static void homeScreen(ArrayList<Transaction> transactions, Scanner scanner) {
+        boolean running = true;//initialize boolean conditional to run the loop
+
+        while (running) { //while the boolean is true, print menu to prompt the user for an input
+            System.out.println();
+            System.out.println("===== FREIGHT TRANSACTION LEDGER =====");
+            System.out.println("D) Add Deposit");
+            System.out.println("P) Make Payment");
+            System.out.println("L) Ledger");
+            System.out.println("X) Exit");
+            System.out.print("Choose an option: ");
+
+            // store the input from the user in a variable
+            String choice = scanner.nextLine().trim().toUpperCase();
+
+            switch (choice) {
+                case "D":// if user picks D, call the addTransaction method to add deposit
+                    addTransaction(transactions, scanner, true, FILE_NAME);
+                    break;
+                case "P": // if user picks P, call the addTransaction method to add a payment
+                    addTransaction(transactions, scanner, false, FILE_NAME);
+                    break;
+                case "L": // if user picks L, print a message to let the user know the ledger is being built
+                    System.out.println("ledger screen/Menu is coming");
+                    break;
+                case "X": // if user picks X, print a message and turn boolean to false to stop the loop
+                    System.out.println("Goodbye!");
+                    running = false;
+                    break;
+                default:// if user picks an invalid letter, print a message
+                    System.out.println("Invalid option. Please choose D, P, L, or X.");
+            }
+
+        }
+
+    }
 }
