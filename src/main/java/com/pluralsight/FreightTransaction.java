@@ -201,4 +201,43 @@ public class FreightTransaction {
         return payments; //return the payments arraylist
     }
 
+    //added a method to display the ledger menu
+    public static void ledgerScreen(ArrayList<Transaction> transactions, Scanner scanner) {
+        //booleant to help track the while loop
+        boolean running = true;
+
+        while (running) {//while boolean is true, ask display Menu and prompt user to pick an option
+            System.out.println();
+            System.out.println("===== LEDGER =====");
+            System.out.println("A) All Transactions");
+            System.out.println("D) View Deposits");
+            System.out.println("P) View Payments");
+            System.out.println("R) Reports");
+            System.out.println("H) Home");
+            System.out.print("Choose an option: ");
+            // store the user input in a variable
+            String choice = scanner.nextLine().trim().toUpperCase();
+
+            switch (choice) {
+                case "A"://if choice is A, call the printTransaction method
+                    printTransactions(transactions);
+                    break;
+                case "D":// if choice is D, call the printTransaction and pass it a getDeposits to print it
+                    printTransactions(getDeposits(transactions));
+                    break;
+                case "P"://if the user choice is P, call the printTransaction and pass it getDeposit method to print
+                    printTransactions(getPayments(transactions));
+                    break;
+                case "R"://ledger coming soon
+                    System.out.println("Reports coming soon...");
+                    break;
+                case "H"://if user choice is H, stop running loop. loop will return to method that called it which is home
+                    running = false;   // ends this loop, back to the home screen
+                    break;
+                default://if user choice is an invalid input, print a message
+                    System.out.println("Invalid option. Please choose A, D, P, R, or H.");
+            }
+        }
+
+    }
 }
