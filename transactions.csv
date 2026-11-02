@@ -1,0 +1,101 @@
+date|time|description|vendor|amount
+2026-10-30|06:10:00|Invoice 1052 paid - Dallas to San Antonio load|Lowe's|2931.21
+2026-10-28|08:15:00|Invoice 1001 paid - Dallas to Houston load|Walmart|2400.00
+2026-10-27|06:30:00|Diesel fuel|Love's Travel Stop|-650.75
+2026-10-25|14:00:00|Invoice 1002 paid - freight delivery|Home Depot|1850.00
+2026-10-22|15:15:00|Invoice 1036 paid - regional shipment|Costco|2760.68
+2026-10-20|10:45:00|Tire replacement truck #3|Bridgestone|-1200.00
+2026-10-16|18:50:00|Truck maintenance - brake service|Fleet Service Center|-1058.08
+2026-10-16|05:50:00|Invoice 1178 paid - Dallas to San Antonio load|Lowe's|1705.09
+2026-10-15|09:00:00|Warehouse rent|Irving Storage LLC|-3000.00
+2026-10-13|09:10:00|Load board subscription|DAT Freight & Analytics|-205.84
+2026-10-10|16:20:00|Driver weekly pay|Mike Johnson|-1100.00
+2026-10-03|09:20:00|Invoice 1099 paid - Fort Worth to Austin haul|Sysco|1723.91
+2026-09-30|11:00:00|Invoice 0998 paid - pallet storage|Target|900.00
+2026-09-21|05:30:00|Invoice 1043 paid - freight delivery|Home Depot|2294.27
+2026-09-21|05:00:00|Truck insurance premium|Progressive Commercial|-819.08
+2026-09-18|07:45:00|Truck oil change|Jiffy Lube|-120.00
+2026-09-11|14:00:00|Truck maintenance - brake service|Fleet Service Center|-983.75
+2026-09-09|16:20:00|Toll charges|TxTag|-202.19
+2026-09-05|18:40:00|Diesel fuel|Love's Travel Stop|-460.82
+2026-08-23|08:20:00|Trailer repair|Great Dane Service|-1115.32
+2026-08-17|05:00:00|Truck insurance premium|Progressive Commercial|-1373.39
+2026-08-15|17:50:00|Truck registration renewal|Texas DMV|-828.09
+2026-08-07|12:20:00|Truck insurance premium|Progressive Commercial|-1536.57
+2026-08-07|10:20:00|Driver weekly pay|Carlos Ramirez|-1160.48
+2026-07-26|10:45:00|Invoice 1157 paid - freight delivery|Home Depot|2549.87
+2026-07-25|08:30:00|Truck wash|Blue Beacon Truck Wash|-96.64
+2026-07-21|12:50:00|Invoice 1158 paid - refrigerated freight|Kroger|3340.10
+2026-07-17|08:20:00|Load board subscription|DAT Freight & Analytics|-188.53
+2026-07-11|09:00:00|Office supplies|Staples|-83.80
+2026-07-09|05:20:00|Invoice 1147 paid - regional shipment|Costco|2882.01
+2026-07-08|06:40:00|Truck wash|Blue Beacon Truck Wash|-124.09
+2026-07-07|09:50:00|Invoice 1011 paid - construction materials haul|ABC Supply|3612.36
+2026-07-05|10:15:00|Invoice 1149 paid - construction materials haul|ABC Supply|3126.26
+2026-06-28|05:20:00|Invoice 1012 paid - warehouse transfer|Amazon|2070.41
+2026-06-26|08:15:00|Invoice 1191 paid - construction materials haul|ABC Supply|2168.18
+2026-06-24|19:15:00|Invoice 1034 paid - warehouse transfer|Amazon|3432.27
+2026-06-24|08:50:00|Invoice 1108 paid - Dallas to San Antonio load|Lowe's|2450.03
+2026-06-21|16:10:00|ELD monthly subscription|Samsara|-180.79
+2026-06-18|18:10:00|Truck insurance premium|Progressive Commercial|-977.25
+2026-06-16|19:20:00|Load board subscription|DAT Freight & Analytics|-242.44
+2026-06-13|06:10:00|Truck oil change|Jiffy Lube|-165.89
+2026-06-05|17:50:00|Driver weekly pay|Carlos Ramirez|-1130.61
+2026-06-01|15:15:00|Invoice 1098 paid - Dallas to San Antonio load|Lowe's|2208.30
+2026-05-30|12:00:00|Invoice 1195 paid - Dallas to Houston load|Walmart|2979.78
+2026-05-20|06:30:00|Truck registration renewal|Texas DMV|-694.61
+2026-05-17|10:10:00|Dispatch software subscription|Motive|-184.95
+2026-05-11|14:40:00|Truck maintenance - brake service|Fleet Service Center|-483.61
+2026-05-10|16:10:00|Invoice 1083 paid - freight delivery|Home Depot|1428.33
+2026-04-17|07:20:00|Invoice 1191 paid - retail distribution load|Target|2581.75
+2026-04-15|07:30:00|Load board subscription|DAT Freight & Analytics|-182.50
+2026-03-28|16:40:00|Invoice 1019 paid - retail distribution load|Target|1517.88
+2026-03-15|14:20:00|Truck insurance premium|Progressive Commercial|-767.54
+2026-03-13|13:40:00|Invoice 1153 paid - warehouse transfer|Amazon|3727.96
+2026-03-08|10:10:00|Invoice 1155 paid - freight delivery|Home Depot|2518.78
+2026-03-07|11:15:00|Truck wash|Blue Beacon Truck Wash|-94.75
+2026-01-26|06:00:00|Diesel fuel|Pilot Flying J|-420.74
+2026-01-23|15:00:00|Invoice 1134 paid - Dallas to Houston load|Walmart|2080.89
+2026-01-15|19:50:00|Tire replacement truck #3|Bridgestone|-1299.56
+2026-01-12|08:15:00|ELD monthly subscription|Samsara|-134.51
+2026-01-11|16:30:00|Truck wash|Blue Beacon Truck Wash|-78.28
+2025-12-29|16:30:00|Truck insurance premium|Progressive Commercial|-740.99
+2025-12-13|17:20:00|Truck registration renewal|Texas DMV|-422.26
+2025-12-12|13:30:00|Invoice 0950 paid - holiday shipments|Amazon|5200.00
+2025-12-05|06:30:00|Dispatch software subscription|Motive|-232.20
+2025-12-02|17:40:00|Truck insurance premium|Progressive Commercial|-1568.68
+2025-11-27|11:00:00|Truck insurance premium|Progressive Commercial|-1361.16
+2025-11-25|09:15:00|Invoice 0937 paid - freight delivery|Home Depot|1841.29
+2025-11-08|10:15:00|Trailer repair|Great Dane Service|-810.36
+2025-10-28|05:30:00|Invoice 0973 paid - warehouse transfer|Amazon|3472.69
+2025-10-23|14:00:00|Warehouse rent|Irving Storage LLC|-3350.87
+2025-10-22|14:30:00|Load board subscription|DAT Freight & Analytics|-259.81
+2025-10-17|09:10:00|Invoice 0930 paid - Fort Worth to Austin haul|Sysco|2911.31
+2025-10-13|07:30:00|Driver weekly pay|Carlos Ramirez|-1482.98
+2025-10-10|19:20:00|Driver weekly pay|Mike Johnson|-977.52
+2025-09-28|10:30:00|Invoice 0984 paid - warehouse transfer|Amazon|3736.89
+2025-09-20|19:40:00|Driver weekly pay|James Wilson|-1440.09
+2025-08-23|09:20:00|Invoice 1004 paid - overnight delivery|FedEx Freight|1548.90
+2025-08-14|14:30:00|Invoice 0903 paid - Dallas to Houston load|Walmart|3378.24
+2025-08-05|07:45:00|Office supplies|Staples|-172.03
+2025-07-24|05:00:00|Invoice 0916 paid - overnight delivery|FedEx Freight|2426.88
+2025-07-21|17:30:00|Toll charges|TxTag|-69.46
+2025-07-13|18:40:00|Driver weekly pay|James Wilson|-1575.76
+2025-07-09|11:20:00|Invoice 0970 paid - Fort Worth to Austin haul|Sysco|2112.84
+2025-07-06|11:40:00|Dispatch software subscription|Motive|-256.60
+2025-06-19|08:10:00|Invoice 0997 paid - pallet storage|Target|609.80
+2025-06-12|10:40:00|Dispatch software subscription|Motive|-113.77
+2025-06-06|08:45:00|Invoice 0927 paid - Dallas to Houston load|Walmart|1969.51
+2025-06-02|06:30:00|Invoice 0928 paid - Dallas to San Antonio load|Lowe's|1461.25
+2025-06-01|16:45:00|Driver weekly pay|James Wilson|-1408.97
+2025-05-29|12:45:00|Office supplies|Staples|-191.98
+2025-05-06|18:10:00|Driver weekly pay|James Wilson|-1059.15
+2025-05-05|13:20:00|Invoice 0933 paid - Fort Worth to Austin haul|Sysco|2466.45
+2025-04-24|15:15:00|Invoice 0998 paid - Fort Worth to Austin haul|Sysco|3380.84
+2025-04-22|12:50:00|Office supplies|Staples|-212.83
+2025-03-25|17:10:00|Load board subscription|DAT Freight & Analytics|-150.59
+2025-03-23|14:15:00|Invoice 0906 paid - overnight delivery|FedEx Freight|1326.23
+2025-03-01|14:20:00|Driver weekly pay|Carlos Ramirez|-1559.99
+2025-02-11|19:15:00|Diesel fuel|Pilot Flying J|-557.38
+2025-01-27|05:30:00|DOT inspection fee|Texas Truck Center|-156.86
+2025-01-18|19:00:00|Truck oil change|Jiffy Lube|-249.70
