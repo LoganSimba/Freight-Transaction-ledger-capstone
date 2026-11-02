@@ -188,4 +188,17 @@ public class FreightTransaction {
         return deposits; //return the deposit list
     }
 
+    // method to get all payments
+    public static ArrayList<Transaction> getPayments(ArrayList<Transaction> transactions) {
+        // initialize arraylist to store all payments
+        ArrayList<Transaction> payments = new ArrayList<>();
+        //iterate through the loop and check each transaction
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() < 0) { //check if the transaction amount is negative, if so
+                payments.add(transaction);// add the negative/payment to the payments arraylist
+            }
+        }
+        return payments; //return the payments arraylist
+    }
+
 }
