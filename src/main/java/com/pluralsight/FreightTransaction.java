@@ -1,7 +1,9 @@
 package com.pluralsight;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -10,12 +12,16 @@ import java.util.Comparator;
 import java.util.Scanner;
 
 public class FreightTransaction {
+    //initialize a final string to hold the csv file
     public static final String FILE_NAME = "transactions.csv";
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         // initialize an arraylist hand populate it with the csv
         ArrayList<Transaction> transactions = loadTransaction(FILE_NAME);
-        printTransactions(transactions);
+        addTransaction(transactions, scanner, true, FILE_NAME);
+       printTransactions(transactions);
+
 
     }
     //method to load transactions in the arrayList
@@ -81,6 +87,53 @@ public class FreightTransaction {
                     transaction.getVendor(),
                     transaction.getAmount());
         }
+    }
+    // method to add a transaction to the file
+    public static void addTransaction(ArrayList<Transaction> transactions,Scanner scanner, boolean isDeposit, String FileName){
+        System.out.println("Adding a transaction...");
+        if(isDeposit){
+            System.out.println("Making a deposit transaction");//if boolean is true, we make a deposit transaction
+        }else{
+            System.out.println("Making a payment transaction");//if boolean is false, we make a payment
+        }
+        // ask user for the description and store it in a variable
+        System.out.print("Description: ");
+        String description = scanner.nextLine().trim();
+        //ask user for the vendor and store it in a variable
+        System.out.print("Vendor: ");
+        String vendor = scanner.nextLine().trim();
+
+        //if boolean is true, print deposit amount, else print payment amount and save the in a vairiable
+        System.out.println(isDeposit ? "Deposit amount: " : "Payment amount: ");
+        double amount = Double.parseDouble(scanner.nextLine().trim());
+        //if boolean is false, then its a payment, so we make it a negative number
+        if(!isDeposit){
+            amount = - amount;
+        }
+        LocalDate date = LocalDate.now();//we get the today for now
+        LocalTime time = LocalTime.now();//we get the time for now
+        //we add the user inputs to the transaction arralylist
+        transactions.add(new Transaction(date, time, description, vendor, amount));
+        //format in the desired format to match csv file
+        String line = String.format("%s|%s|%s|%s|%.2f",
+                date,
+                time.format(DateTimeFormatter.ofPattern("HH:mm:ss")),
+                description,
+                vendor,
+                amount);
+        //try catch block to write to the file and handle all issues
+        try{
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FileName, true));
+            writer.write(line);
+            writer.newLine();
+            //if isDeposit(boolean) true, print deposit saved else payment saved
+            System.out.println(isDeposit ? "Deposit saved" : "Payment saved");
+            writer.close();
+        }//catch the exception
+        catch(Exception e){
+            System.out.println("Could not save to file: " + e.getMessage());
+        }
+
     }
 
 }
