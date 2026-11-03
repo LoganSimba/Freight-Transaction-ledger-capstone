@@ -376,8 +376,34 @@ public class FreightTransaction {
                     break;
 
                 case "6"://if user choice is 6, exit! turn boolean false to exit
-                    running = false;
+                    System.out.println("Enter start date(yyyy-MM-dd) (Press Enter to skip)");
+                    String start = scanner.nextLine().trim();
+                    //store it as LocalDate type if the user typed null else parse the string they entered
+                    LocalDate startSearch = start.isEmpty() ? null : LocalDate.parse(start);
+
+                    System.out.println("Enter end date(yyy-MM-dd) (Press Enter to skip)");
+                    String end = scanner.nextLine().trim();
+                    //Store the user answer as LocalDate if it user pressed enter else parse it to a LocalDate type
+                    LocalDate endSearch = end.isEmpty() ? null : LocalDate.parse(end);
+
+                    System.out.println("Enter description (Press Enter to skip)");
+                    String description = scanner.nextLine().trim();//store in the description variable
+                    //if user hit emptu
+                    String descriptionSearch = description.isEmpty() ? null : description;
+
+                    System.out.println("Enter vendor name (Press Enter to skip)");
+                    String v = scanner.nextLine().trim();
+                    // if is empty, set to null to skip the filter
+                    String vendorSearch = v.isEmpty() ? null : v;
+
+                    System.out.println("Enter amount (Press Enter to skip)");
+                    String amount = scanner.nextLine().trim();
+                    //if user press enter, set it to null for wrapper class,else parse the amount to wrapper class Double
+                    Double amountSearch = amount.isEmpty() ? null : Double.parseDouble(amount);
+                    //call the customSearch and print it.
+                    printTransactions(customSearch(transactions, startSearch, endSearch, description, vendorSearch, amountSearch));
                     break;
+
 
                 default:// if user inputs an invalid option,
                     System.out.println("Invalid option, try again");
@@ -385,6 +411,41 @@ public class FreightTransaction {
 
 
         }
+
+    }
+
+    //method to add custom search
+    public static ArrayList<Transaction> customSearch(ArrayList<Transaction> transactions, LocalDate startDateSearch,
+                                                      LocalDate endDateSearch, String descriptionSearch, String vendorSearch,
+                                                      Double amountSearch) {
+        //arraylist to store the result
+        ArrayList<Transaction> result = new ArrayList<>();
+        //iterate through the arraylist
+        for (Transaction transaction : transactions) {
+            boolean matches = true;
+            //filter all the dates before the startdateSearch, turn boolean to false
+            if (startDateSearch != null && transaction.getDate().isBefore(startDateSearch)) {
+                matches = false;
+            }
+            //if endDatesearch is not empty, and all the dates after the end date
+            if (endDateSearch != null && transaction.getDate().isAfter(endDateSearch)) {
+                matches = false;
+            }// if description is not null and teh description searchcontains words in description of transactions
+            if (descriptionSearch != null && !transaction.getDescription().toLowerCase().contains(descriptionSearch
+                    .toLowerCase())) {
+                matches = false;
+            }//if vendorSearch not null and the transaction vendor does not contain the vendorsearch rutn boolean false
+            if (vendorSearch != null && !transaction.getVendor().toLowerCase().contains(vendorSearch.toLowerCase())) {
+                matches = false;
+            }//if amount isnt null and it is not equal the amount in our transaction turn false
+            if (amountSearch != null && transaction.getAmount() != amountSearch) {
+                matches = false;
+            }
+            if (matches) {// if boolean was true the above add the transaction to the result arraylist
+                result.add(transaction);
+            }
+        }
+        return result;//return result
 
     }
 
