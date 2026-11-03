@@ -19,7 +19,7 @@ public class FreightTransaction {
         Scanner scanner = new Scanner(System.in);
         // initialize an arraylist hand populate it with the csv
         ArrayList<Transaction> transactions = loadTransaction(FILE_NAME);
-        printTransactions(previousMonth(transactions));
+        printTransactions(yearToDate(transactions));
 
 
     }
@@ -274,6 +274,21 @@ public class FreightTransaction {
 
         return result;// return the arraylist that stores transactions from previous months
 
+    }
+
+    // method to get transactions from the beginning of the year
+    public static ArrayList<Transaction> yearToDate(ArrayList<Transaction> transactions) {
+        //arraylist to store the result
+        ArrayList<Transaction> result = new ArrayList<>();
+        int thisYear = LocalDate.now().getYear();//get the current year and store it in a variable
+
+        //iterate through the transaction list, and of the year is the same, add it to the result list
+        for (Transaction transaction : transactions) {
+            if (transaction.getDate().getYear() == thisYear) {
+                result.add(transaction);// adding transactions of current year to the result arraylist
+            }
+        }
+        return result; // return the arraylist
     }
 
 
