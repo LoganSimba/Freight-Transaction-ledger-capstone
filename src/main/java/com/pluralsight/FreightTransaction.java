@@ -19,7 +19,7 @@ public class FreightTransaction {
         Scanner scanner = new Scanner(System.in);
         // initialize an arraylist hand populate it with the csv
         ArrayList<Transaction> transactions = loadTransaction(FILE_NAME);
-        printTransactions(previousYear(transactions));
+        homeScreen(transactions, scanner);
 
 
     }
@@ -161,7 +161,7 @@ public class FreightTransaction {
                     addTransaction(transactions, scanner, false, FILE_NAME);
                     break;
                 case "L": // if user picks L, print a message to let the user know the ledger is being built
-                    System.out.println("ledger screen/Menu is coming");
+                    ledgerScreen(transactions, scanner);
                     break;
                 case "X": // if user picks X, print a message and turn boolean to false to stop the loop
                     System.out.println("Goodbye!");
@@ -228,8 +228,8 @@ public class FreightTransaction {
                 case "P"://if the user choice is P, call the printTransaction and pass it getDeposit method to print
                     printTransactions(getPayments(transactions));
                     break;
-                case "R"://ledger coming soon
-                    System.out.println("Reports coming soon...");
+                case "R"://if user choice is R, call the reports method and print the reports menu
+                    reports(transactions, scanner);
                     break;
                 case "H"://if user choice is H, stop running loop. loop will return to method that called it which is home
                     running = false;   // ends this loop, back to the home screen
@@ -305,6 +305,62 @@ public class FreightTransaction {
 
         }
         return result;//return arraylist holding transactions of previous year
+    }
+
+    //method to display the reports screen
+    public static void reports(ArrayList<Transaction> transactions, Scanner scanner) {
+        //boolean to keep track of the loop
+        boolean running = true;
+
+        while (running) { //while the app is running, display menu and prompt user for an input
+            System.out.println();
+            System.out.println("===== REPORTS =====");
+            System.out.println("1) Month To Date");
+            System.out.println("2) Previous Month");
+            System.out.println("3) Year To Date");
+            System.out.println("4) Previous Year");
+            System.out.println("5) Search by Vendor");
+            System.out.println("6) Custom Search");
+            System.out.println("0) Back");
+            System.out.print("Choose an option: ");
+
+            //store the user input in a variable
+            String choice = scanner.nextLine().trim();
+
+            switch (choice) {
+                case "1"://if user choice is one, pass monthToDate to the printTransactions
+                    printTransactions(monthToDate(transactions));
+                    break;
+
+
+                case "2"://if user choice is 2, print previouse month transactions
+                    printTransactions(previousMonth(transactions));
+                    break;
+
+
+                case "3":// if user choice is 3, print year to date transactions
+                    printTransactions(yearToDate(transactions));
+                    break;
+
+                case "4"://if user choice is 4, print previous year transactions
+                    printTransactions(previousYear(transactions));
+                    break;
+
+                case "5"://if user choice is 5, print a massage to let the user know the feature is coming
+                    System.out.println("searchByVendor is coming..");
+                    break;
+
+                case "6"://if user choice is 6, exit! turn boolean false to exit
+                    running = false;
+                    break;
+
+                default:// if user inputs an invalid option,
+                    System.out.println("Invalid option, try again");
+            }
+
+
+        }
+
     }
 
 
