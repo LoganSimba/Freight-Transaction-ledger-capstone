@@ -19,7 +19,7 @@ public class FreightTransaction {
         Scanner scanner = new Scanner(System.in);
         // initialize an arraylist hand populate it with the csv
         ArrayList<Transaction> transactions = loadTransaction(FILE_NAME);
-        homeScreen(transactions, scanner);
+        printTransactions(previousMonth(transactions));
 
 
     }
@@ -256,6 +256,24 @@ public class FreightTransaction {
             }
         }
         return result; // return the arraylist
+    }
+
+    // method to get transactions from previous month
+    public static ArrayList<Transaction> previousMonth(ArrayList<Transaction> transactions) {
+        //initialize arraylist to store the result
+        ArrayList<Transaction> result = new ArrayList();
+        LocalDate lastMonth = LocalDate.now().minusMonths(1);//get the previous months
+
+        //iterate through the transactions list and check for the transaction is in the previous month
+        for (Transaction transaction : transactions) {
+            if (transaction.getDate().getYear() == lastMonth.getYear()
+                    && transaction.getDate().getMonth() == lastMonth.getMonth()) {
+                result.add(transaction);// if the transaction in previous month, add it to the result arraylist
+            }
+        }
+
+        return result;// return the arraylist that stores transactions from previous months
+
     }
 
 
