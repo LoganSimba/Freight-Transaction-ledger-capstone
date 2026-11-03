@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class FreightTransaction {
@@ -307,6 +309,26 @@ public class FreightTransaction {
         return result;//return arraylist holding transactions of previous year
     }
 
+    // method to search by vendor
+    public static ArrayList<Transaction> searchByVendor(ArrayList<Transaction> transactions, String vendor) {
+        //initialize arrayList to hold the result
+        ArrayList<Transaction> result = new ArrayList<>();
+        //check edge case scenario,check if the vendor is null return
+        if (vendor == null) {
+            System.out.println("No match found...");//print a message if no vendor name
+            return result;
+        }
+        //iterate through the arralist, if vendor name is in the transaction, add it to the list
+        for (Transaction transaction : transactions) {
+            if (transaction.getVendor().toLowerCase().contains(vendor.toLowerCase())) {
+                result.add(transaction);//add the transactions to the result
+            }
+        }
+        return result;//return the result
+
+    }
+
+
     //method to display the reports screen
     public static void reports(ArrayList<Transaction> transactions, Scanner scanner) {
         //boolean to keep track of the loop
@@ -347,7 +369,10 @@ public class FreightTransaction {
                     break;
 
                 case "5"://if user choice is 5, print a massage to let the user know the feature is coming
-                    System.out.println("searchByVendor is coming..");
+                    System.out.print("Vendor Name: ");
+                    String vendor = scanner.nextLine().trim();
+                    //print transactions by the vendor name
+                    printTransactions(searchByVendor(transactions, vendor));
                     break;
 
                 case "6"://if user choice is 6, exit! turn boolean false to exit
