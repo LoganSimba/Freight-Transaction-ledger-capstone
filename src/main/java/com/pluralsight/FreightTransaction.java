@@ -82,7 +82,10 @@ public class FreightTransaction {
 
         // iterate through the list and print the transaction in the desired format, spacing for UI
         for (Transaction transaction : transactions) {
-            System.out.printf("%-12s %-10s %-45s %-30s %,12.2f%n",
+            //add color green if the amount > 0 else make the color Red
+            String color = transaction.getAmount() > 0 ? Colors.GREEN : Colors.RED;
+
+            System.out.printf("%-12s %-10s %-45s %-30s " + color + "%,12.2f" + Colors.RESET + "%n",
                     transaction.getDate(),
                     transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                     transaction.getDescription(),
@@ -166,7 +169,7 @@ public class FreightTransaction {
                     ledgerScreen(transactions, scanner);
                     break;
                 case "X": // if user picks X, print a message and turn boolean to false to stop the loop
-                    System.out.println("Goodbye!");
+                    System.out.println("GoodBye!");
                     running = false;
                     break;
                 default:// if user picks an invalid letter, print a message
