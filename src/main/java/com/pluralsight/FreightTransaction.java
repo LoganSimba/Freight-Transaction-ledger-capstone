@@ -1,5 +1,6 @@
 package com.pluralsight;
 
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -226,12 +227,15 @@ public class FreightTransaction {
             switch (choice) {
                 case "A"://if choice is A, call the printTransaction method
                     printTransactions(transactions);
+                    printTotals(transactions);
                     break;
                 case "D":// if choice is D, call the printTransaction and pass it a getDeposits to print it
                     printTransactions(getDeposits(transactions));
+                    printTotals(getDeposits(transactions));
                     break;
                 case "P"://if the user choice is P, call the printTransaction and pass it getDeposit method to print
                     printTransactions(getPayments(transactions));
+                    printTotals(getPayments(transactions));
                     break;
                 case "R"://if user choice is R, call the reports method and print the reports menu
                     reports(transactions, scanner);
@@ -354,21 +358,29 @@ public class FreightTransaction {
 
             switch (choice) {
                 case "1"://if user choice is one, pass monthToDate to the printTransactions
+                    ArrayList<Transaction> monthToCurrentDate = monthToDate(transactions);
                     printTransactions(monthToDate(transactions));
+                    printTotals(monthToCurrentDate);//print totals foe the current month
                     break;
 
 
                 case "2"://if user choice is 2, print previouse month transactions
+                    ArrayList<Transaction> previousMonthTransactions = previousMonth(transactions);
                     printTransactions(previousMonth(transactions));
+                    printTotals(previousMonthTransactions);
                     break;
 
 
                 case "3":// if user choice is 3, print year to date transactions
+                    ArrayList<Transaction> yearToCurrentDate = yearToDate(transactions);
                     printTransactions(yearToDate(transactions));
+                    printTotals(yearToCurrentDate);
                     break;
 
                 case "4"://if user choice is 4, print previous year transactions
+                    ArrayList<Transaction> lastYear = previousYear(transactions);
                     printTransactions(previousYear(transactions));
+                    printTotals(lastYear);//print totals of previous year
                     break;
 
                 case "5"://if user choice is 5, print a massage to let the user know the feature is coming
@@ -376,6 +388,7 @@ public class FreightTransaction {
                     String vendor = scanner.nextLine().trim();
                     //print transactions by the vendor name
                     printTransactions(searchByVendor(transactions, vendor));
+                    printTotals(searchByVendor(transactions, vendor));//print totals by vendor name
                     break;
 
                 case "6"://if user choice is 6, exit! turn boolean false to exit
@@ -404,9 +417,16 @@ public class FreightTransaction {
                     //if user press enter, set it to null for wrapper class,else parse the amount to wrapper class Double
                     Double amountSearch = amount.isEmpty() ? null : Double.parseDouble(amount);
                     //call the customSearch and print it.
-                    printTransactions(customSearch(transactions, startSearch, endSearch, description, vendorSearch, amountSearch));
+                    printTransactions(customSearch(transactions, startSearch, endSearch,
+                            description, vendorSearch, amountSearch));
+
+                    printTotals(customSearch(transactions, startSearch, endSearch,
+                            description, vendorSearch, amountSearch));
                     break;
 
+
+                case "0":// if the use choice is 0, go back
+                    running = false;
 
                 default:// if user inputs an invalid option,
                     System.out.println("Invalid option, try again");
@@ -449,6 +469,38 @@ public class FreightTransaction {
             }
         }
         return result;//return result
+
+    }
+
+    //method to print the totals
+    public static void printTotals(ArrayList<Transaction> transactions) {
+        if (transactions.isEmpty()) {//edge case scenario where transactions are empty, return
+            return;
+        }
+        double deposits = 0;//initialize deposits to increment count
+        double payments = 0;//initialize payments to increment payments
+
+        //iterate through the list, and if transaction amount > 0 increment count, else increment payments
+        for (Transaction transaction : transactions) {
+            if (transaction.getAmount() > 0) {
+                deposits += transaction.getAmount();
+            } else {
+                payments += transaction.getAmount();
+            }
+        }//calculat the total/net
+        double net = deposits + payments;
+        String netColor = net >= 0 ? Colors.GREEN : Colors.RED;//ternary statemtns to turn color green or bad
+
+        System.out.println("-".repeat(115));//make a line with repear method
+        if (deposits != 0) {//if there is deposits, display their sum
+            System.out.printf("%-100s %s %,12.2f%s%n", "Total deposits:", Colors.GREEN, deposits, Colors.RESET);
+        }
+        if (payments != 0) {//if there is a payments, display their total payments
+            System.out.printf("%-100s %s %,12.2f%s%n", "Total payments:", Colors.RED, payments, Colors.RESET);
+        }
+        if (deposits != 0 && payments != 0) {//if there is deposits and payments, display their difference
+            System.out.printf("%-100s %s %,12.2f%s%n", "Net:", netColor, net, Colors.RESET);//display net in colors
+        }
 
     }
 
