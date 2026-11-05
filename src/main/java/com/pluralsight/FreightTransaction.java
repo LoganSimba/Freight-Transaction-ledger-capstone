@@ -9,6 +9,7 @@ import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Locale;
@@ -426,19 +427,45 @@ public class FreightTransaction {
                     break;
 
                 case "6"://if user choice is 6, exit! turn boolean false to exit
-                    System.out.println("Enter start date(yyyy-MM-dd) (Press Enter to skip)");
-                    String start = scanner.nextLine().trim();
-                    //store it as LocalDate type if the user typed null else parse the string they entered
-                    LocalDate startSearch = start.isEmpty() ? null : LocalDate.parse(start);
 
-                    System.out.println("Enter end date(yyy-MM-dd) (Press Enter to skip)");
-                    String end = scanner.nextLine().trim();
-                    //Store the user answer as LocalDate if it user pressed enter else parse it to a LocalDate type
-                    LocalDate endSearch = end.isEmpty() ? null : LocalDate.parse(end);
+                    //store it as LocalDate type if the user typed null else parse the string they enter
+                    LocalDate startSearch = null;
+                    while(true) {//continue looping until user enters desired format
+                        System.out.println("Enter start date(yyyy-MM-dd) (Press Enter to skip)");
+                        String start = scanner.nextLine().trim();
+
+                        if (start.isEmpty()) {//try catch block to handle cases where user inp
+                            break;
+                        }
+                        try {
+                            startSearch = LocalDate.parse(start);
+                            break;
+                        } catch (DateTimeParseException e) {
+                            System.out.println(Colors.RED + "Invalid date, Use the format yyyy-MM-dd, e.g 2026-10-30 " +
+                                    Colors.RESET);
+                        }
+                    }
+
+
+                    LocalDate endSearch = null;
+                    while(true) {//continue iterating until user enter desired format
+                        System.out.println("Enter end date(yyy-MM-dd) (Press Enter to skip)");
+                        String end = scanner.nextLine().trim();
+                        if (end.isEmpty()) {//try catch block to check for edge case scebnarios where user enter invalid date
+                            break;
+                        }
+                        try {
+                            endSearch = LocalDate.parse(end);
+                            break;
+                        } catch (DateTimeParseException e) {//catch block to catch the exception
+                            System.out.println(Colors.RED + "Invalid date, Use the format yyyy-MM-dd, e.g 2026-10-30"
+                                    + Colors.RESET);//print a message in red color
+                        }
+                    }
 
                     System.out.println("Enter description (Press Enter to skip)");
                     String description = scanner.nextLine().trim();//store in the description variable
-                    //if user hit emptu
+                    //if user choice is empty, set string to null, else store it in a variable
                     String descriptionSearch = description.isEmpty() ? null : description;
 
                     System.out.println("Enter vendor name (Press Enter to skip)");
