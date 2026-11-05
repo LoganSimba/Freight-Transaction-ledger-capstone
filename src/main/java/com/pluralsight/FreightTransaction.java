@@ -112,9 +112,23 @@ public class FreightTransaction {
         String vendor = scanner.nextLine().trim();
 
         //if boolean is true, print deposit amount, else print payment amount and save the in a vairiable
-        System.out.println(isDeposit ? "Deposit amount: " : "Payment amount: ");
-        double amount = Double.parseDouble(scanner.nextLine().trim());
-        //if boolean is false, then its a payment, so we make it a negative number
+        double amount;
+        while (true) {//loop to handle cases where user inputs invalid (-amount) and loops until user enters valid number
+            System.out.println(isDeposit ? "Deposit amount: " : "Payment amount: ");
+            String input = scanner.nextLine().trim();//store the user input in a variable
+
+            try {//try catch to handle if the user
+                amount = Double.parseDouble(input);
+                if (amount <= 0) {// input should be a positive number
+                    System.out.println(Colors.RED + "Amount must be greater than 0." + Colors.RESET);
+                    continue;
+                }
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println(Colors.RED + "Invalid amount. Enter a number, e.g. 150.75" + Colors.RESET);
+            }
+            //if boolean is false, then its a payment, so we make it a negative number
+        }
         if (!isDeposit) {
             amount = -amount;
         }
@@ -417,7 +431,7 @@ public class FreightTransaction {
                     printTotals(lastYear);//print totals of previous year
                     break;
 
-                case "5"://if user choice is 5, print a massage to let the user know the feature is coming
+                case "5"://if user choice is 5, print a massage to let them know
                     System.out.print("Vendor Name: ");
                     String vendor = scanner.nextLine().trim();
                     //store the search by vendor returned list in vendorSearch
