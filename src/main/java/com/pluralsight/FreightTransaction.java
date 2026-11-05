@@ -430,7 +430,7 @@ public class FreightTransaction {
 
                     //store it as LocalDate type if the user typed null else parse the string they enter
                     LocalDate startSearch = null;
-                    while(true) {//continue looping until user enters desired format
+                    while (true) {//continue looping until user enters desired format
                         System.out.println("Enter start date(yyyy-MM-dd) (Press Enter to skip)");
                         String start = scanner.nextLine().trim();
 
@@ -448,7 +448,7 @@ public class FreightTransaction {
 
 
                     LocalDate endSearch = null;
-                    while(true) {//continue iterating until user enter desired format
+                    while (true) {//continue iterating until user enter desired format
                         System.out.println("Enter end date(yyy-MM-dd) (Press Enter to skip)");
                         String end = scanner.nextLine().trim();
                         if (end.isEmpty()) {//try catch block to check for edge case scebnarios where user enter invalid date
