@@ -86,7 +86,7 @@ public class FreightTransaction {
             //add color green if the amount > 0 else make the color Red
             String color = transaction.getAmount() > 0 ? Colors.GREEN : Colors.RED;
 
-            System.out.printf("%-12s %-10s %-45s %-30s " + color + "%,12.2f" + Colors.RESET + "%n",
+            System.out.printf("%-12s %-10s %-50s %-35s " + color + "%,12.2f" + Colors.RESET + "%n",
                     transaction.getDate(),
                     transaction.getTime().format(DateTimeFormatter.ofPattern("HH:mm:ss")),
                     transaction.getDescription(),
@@ -145,16 +145,28 @@ public class FreightTransaction {
 
     // add method do display screen/menu
     public static void homeScreen(ArrayList<Transaction> transactions, Scanner scanner) {
-        boolean running = true;//initialize boolean conditional to run the loop
+        boolean running = true;
 
-        while (running) { //while the boolean is true, print menu to prompt the user for an input
+        while (running) {//while the boolean is running, display menu and prompt user for an input
+
             System.out.println();
-            System.out.println("===== FREIGHT TRANSACTION LEDGER =====");
-            System.out.println("D) Add Deposit");
-            System.out.println("P) Make Payment");
-            System.out.println("L) Ledger");
-            System.out.println("X) Exit");
-            System.out.print("Choose an option: ");
+            System.out.println(Colors.CYAN + "================================================");
+            System.out.println("              FREIGHT LEDGER HOME SCREEN");
+            System.out.println("================================================" + Colors.RESET);
+
+            System.out.println("  Manage your freight finances");
+            System.out.println();
+
+            System.out.println(Colors.GREEN + "  D)  Add Deposit" + Colors.RESET);
+            System.out.println(Colors.RED + "  P)  Make Payment" + Colors.RESET);
+            System.out.println(Colors.CYAN + "  L)  View Ledger" + Colors.RESET);
+
+            System.out.println();
+            System.out.println("  --------------------------------------------");
+            System.out.println("  X)  Exit");
+            System.out.println(Colors.CYAN + "================================================" + Colors.RESET);
+
+            System.out.print("  Select an option (D/P/L/X): ");
 
             // store the input from the user in a variable
             String choice = scanner.nextLine().trim().toUpperCase();
@@ -212,17 +224,30 @@ public class FreightTransaction {
         //booleant to help track the while loop
         boolean running = true;
 
-        while (running) {//while boolean is true, ask display Menu and prompt user to pick an option
+        while (running) {//while the boolean is running, display menu and prompt user for an input
+
             System.out.println();
-            System.out.println("===== LEDGER =====");
-            System.out.println("A) All Transactions");
-            System.out.println("D) View Deposits");
-            System.out.println("P) View Payments");
-            System.out.println("R) Reports");
-            System.out.println("H) Home");
-            System.out.print("Choose an option: ");
-            // store the user input in a variable
+            System.out.println(Colors.CYAN + "================================================");
+            System.out.println("                    LEDGER");
+            System.out.println("================================================" + Colors.RESET);
+
+            System.out.println("  View and analyze your transactions");
+            System.out.println();
+
+            System.out.println("  A)  All Transactions");
+            System.out.println(Colors.GREEN + "  D)  View Deposits" + Colors.RESET);
+            System.out.println(Colors.RED + "  P)  View Payments" + Colors.RESET);
+            System.out.println(Colors.CYAN + "  R)  Reports & Insights" + Colors.RESET);
+
+            System.out.println();
+            System.out.println("  --------------------------------------------");
+            System.out.println("  H)  Return to Home");
+
+            System.out.println(Colors.CYAN + "================================================" + Colors.RESET);
+            System.out.print("  Select an option (A/D/P/R/H): ");
+            //store user selection in a viriable
             String choice = scanner.nextLine().trim().toUpperCase();
+
 
             switch (choice) {
                 case "A"://if choice is A, call the printTransaction method
@@ -340,18 +365,35 @@ public class FreightTransaction {
     public static void reports(ArrayList<Transaction> transactions, Scanner scanner) {
         //boolean to keep track of the loop
         boolean running = true;
+        while (running) {//while the boolean is running, display menu and prompt user for an input
 
-        while (running) { //while the app is running, display menu and prompt user for an input
             System.out.println();
-            System.out.println("===== REPORTS =====");
-            System.out.println("1) Month To Date");
-            System.out.println("2) Previous Month");
-            System.out.println("3) Year To Date");
-            System.out.println("4) Previous Year");
-            System.out.println("5) Search by Vendor");
-            System.out.println("6) Custom Search");
-            System.out.println("0) Back");
-            System.out.print("Choose an option: ");
+            System.out.println(Colors.CYAN + "================================================");
+            System.out.println("                    REPORTS");
+            System.out.println("================================================" + Colors.RESET);
+
+            System.out.println("  View financial reports and search transactions");
+            System.out.println();
+
+            System.out.println(Colors.YELLOW + "  PERIOD REPORTS" + Colors.RESET);
+            System.out.println("  --------------------------------------------");
+            System.out.println("  1)  Month to Date");
+            System.out.println("  2)  Previous Month");
+            System.out.println("  3)  Year to Date");
+            System.out.println("  4)  Previous Year");
+
+            System.out.println();
+            System.out.println(Colors.YELLOW + "  TRANSACTION SEARCH" + Colors.RESET);
+            System.out.println("  --------------------------------------------");
+            System.out.println("  5)  Search by Vendor");
+            System.out.println("  6)  Custom Search");
+
+            System.out.println();
+            System.out.println("  --------------------------------------------");
+            System.out.println("  0)  Return to Ledger");
+
+            System.out.println(Colors.CYAN + "================================================" + Colors.RESET);
+            System.out.print("  Select an option (0-6): ");
 
             //store the user input in a variable
             String choice = scanner.nextLine().trim();
@@ -491,15 +533,15 @@ public class FreightTransaction {
         double net = deposits + payments;
         String netColor = net >= 0 ? Colors.GREEN : Colors.RED;//ternary statemtns to turn color green or bad
 
-        System.out.println("-".repeat(115));//make a line with repear method
+        System.out.println("-".repeat(123));//make a line with repear method
         if (deposits != 0) {//if there is deposits, display their sum
-            System.out.printf("%-100s %s %,12.2f%s%n", "Total deposits:", Colors.GREEN, deposits, Colors.RESET);
+            System.out.printf("%-110s %s %,12.2f%s%n", "Total deposits:", Colors.GREEN, deposits, Colors.RESET);
         }
         if (payments != 0) {//if there is a payments, display their total payments
-            System.out.printf("%-100s %s %,12.2f%s%n", "Total payments:", Colors.RED, payments, Colors.RESET);
+            System.out.printf("%-110s %s %,12.2f%s%n", "Total payments:", Colors.RED, payments, Colors.RESET);
         }
         if (deposits != 0 && payments != 0) {//if there is deposits and payments, display their difference
-            System.out.printf("%-100s %s %,12.2f%s%n", "Net:", netColor, net, Colors.RESET);//display net in colors
+            System.out.printf("%-110s %s %,12.2f%s%n", "Net:", netColor, net, Colors.RESET);//display net in colors
         }
 
     }
