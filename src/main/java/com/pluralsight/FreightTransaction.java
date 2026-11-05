@@ -193,30 +193,19 @@ public class FreightTransaction {
 
     }
 
-    //method to add deposits
-    public static ArrayList<Transaction> getDeposits(ArrayList<Transaction> transactions) {
-        // arrayList to store the transactions with deposits
-        ArrayList<Transaction> deposits = new ArrayList<>();
-        // iterate through the transactions arraylist and if amount > 0, add the transaction to deposit list
-        for (Transaction transaction : transactions) {
-            if (transaction.getAmount() > 0) {
-                deposits.add(transaction);//add transaction to the deposit list
-            }
-        }
-        return deposits; //return the deposit list
-    }
+    //method to get deposit or payment
+    public static ArrayList<Transaction> getDepositsOrPayments(ArrayList<Transaction> transactions, boolean deposit) {
+        ArrayList<Transaction> results = new ArrayList<>();
 
-    // method to get all payments
-    public static ArrayList<Transaction> getPayments(ArrayList<Transaction> transactions) {
-        // initialize arraylist to store all payments
-        ArrayList<Transaction> payments = new ArrayList<>();
-        //iterate through the loop and check each transaction
+        //iterate through the transactions list
         for (Transaction transaction : transactions) {
-            if (transaction.getAmount() < 0) { //check if the transaction amount is negative, if so
-                payments.add(transaction);// add the negative/payment to the payments arraylist
+            if (deposit && transaction.getAmount() >= 0) {//if the boolean is true and getAmount > 0, add to results
+                results.add(transaction);
+            } else if (!deposit && transaction.getAmount() < 0) {//if false and amount < 0, add to result
+                results.add(transaction);
             }
         }
-        return payments; //return the payments arraylist
+        return results;//return the arraylist
     }
 
     //added a method to display the ledger menu
@@ -254,13 +243,15 @@ public class FreightTransaction {
                     printTransactions(transactions);
                     printTotals(transactions);
                     break;
-                case "D":// if choice is D, call the printTransaction and pass it a getDeposits to print it
-                    printTransactions(getDeposits(transactions));
-                    printTotals(getDeposits(transactions));
+                case "D":// if choice is D, call the printTransaction an
+                    ArrayList<Transaction> getDeposits = getDepositsOrPayments(transactions, true);
+                    printTransactions(getDeposits);
+                    printTotals(getDeposits);
                     break;
-                case "P"://if the user choice is P, call the printTransaction and pass it getDeposit method to print
-                    printTransactions(getPayments(transactions));
-                    printTotals(getPayments(transactions));
+                case "P"://if the user choice is P, call the printTransaction and pass it getPayment which stores paymets
+                    ArrayList<Transaction> getPayments = getDepositsOrPayments(transactions, false);
+                    printTransactions(getPayments);
+                    printTotals(getPayments);
                     break;
                 case "R"://if user choice is R, call the reports method and print the reports menu
                     reports(transactions, scanner);
@@ -401,36 +392,37 @@ public class FreightTransaction {
             switch (choice) {
                 case "1"://if user choice is one, pass monthToDate to the printTransactions
                     ArrayList<Transaction> monthToCurrentDate = monthToDate(transactions);
-                    printTransactions(monthToDate(transactions));
+                    printTransactions(monthToCurrentDate);
                     printTotals(monthToCurrentDate);//print totals foe the current month
                     break;
 
 
                 case "2"://if user choice is 2, print previouse month transactions
                     ArrayList<Transaction> previousMonthTransactions = previousMonth(transactions);
-                    printTransactions(previousMonth(transactions));
+                    printTransactions(previousMonthTransactions);
                     printTotals(previousMonthTransactions);
                     break;
 
 
                 case "3":// if user choice is 3, print year to date transactions
                     ArrayList<Transaction> yearToCurrentDate = yearToDate(transactions);
-                    printTransactions(yearToDate(transactions));
+                    printTransactions(yearToCurrentDate);
                     printTotals(yearToCurrentDate);
                     break;
 
                 case "4"://if user choice is 4, print previous year transactions
                     ArrayList<Transaction> lastYear = previousYear(transactions);
-                    printTransactions(previousYear(transactions));
+                    printTransactions(lastYear);
                     printTotals(lastYear);//print totals of previous year
                     break;
 
                 case "5"://if user choice is 5, print a massage to let the user know the feature is coming
                     System.out.print("Vendor Name: ");
                     String vendor = scanner.nextLine().trim();
-                    //print transactions by the vendor name
-                    printTransactions(searchByVendor(transactions, vendor));
-                    printTotals(searchByVendor(transactions, vendor));//print totals by vendor name
+                    //store the search by vendor returned list in vendorSearch
+                    ArrayList<Transaction> vendorNameSearch = searchByVendor(transactions, vendor);
+                    printTransactions(vendorNameSearch);//print the vendorSearch which stored return values
+                    printTotals(vendorNameSearch);//print totals by vendor name
                     break;
 
                 case "6"://if user choice is 6, exit! turn boolean false to exit
@@ -458,17 +450,19 @@ public class FreightTransaction {
                     String amount = scanner.nextLine().trim();
                     //if user press enter, set it to null for wrapper class,else parse the amount to wrapper class Double
                     Double amountSearch = amount.isEmpty() ? null : Double.parseDouble(amount);
-                    //call the customSearch and print it.
-                    printTransactions(customSearch(transactions, startSearch, endSearch,
-                            description, vendorSearch, amountSearch));
 
-                    printTotals(customSearch(transactions, startSearch, endSearch,
-                            description, vendorSearch, amountSearch));
+                    //store the customSearch method in an arrayList to not call it again or have the program filter again
+                    ArrayList<Transaction> holdsCustomSearch = customSearch(transactions, startSearch, endSearch,
+                            description, vendorSearch, amountSearch);
+                    //print transaction and pass it the list that stores the customSearch
+                    printTransactions(holdsCustomSearch);
+                    printTotals(holdsCustomSearch);//print totals of the customSearch
                     break;
 
 
                 case "0":// if the use choice is 0, go back
                     running = false;
+                    break;
 
                 default:// if user inputs an invalid option,
                     System.out.println("Invalid option, try again");
